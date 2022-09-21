@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 
 import reportWebVitals from './reportWebVitals';
-import { Login } from './pages/login';
+// import { Login } from './pages/login';
+import { Register } from './pages/register';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Login />
+    {/* <Login /> */}
+    <Register/>
   </React.StrictMode>
 );
 
