@@ -1,5 +1,5 @@
-export const userPage = () => {
-    return(
-        <h1>User Page</h1>
+export const UserPage = () => {
+    return (
+        <h1>olá mundo</h1>
     )
 }
