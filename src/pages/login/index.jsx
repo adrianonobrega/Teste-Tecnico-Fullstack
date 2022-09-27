@@ -6,7 +6,7 @@ import { Api } from '../../services/api';
 import { toast } from 'react-toastify';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
-export const Login = () => {
+export const Login = ({authenticated, setAuthenticated}) => {
 
     const schema = yup.object().shape({
       email: yup.string().email('E-mail inválido').required('E-mail é obrigatório'),
@@ -22,6 +22,7 @@ export const Login = () => {
       .then(res => {
         const {token} = res.data
         const {user_id} = res.data
+        setAuthenticated(true)
         localStorage.setItem("user_id",user_id)
         localStorage.setItem("token",token)
         toast.success("Login efetuado com sucesso")
@@ -33,6 +34,11 @@ export const Login = () => {
       })
     }
 
+    if(authenticated){
+      return navigate('/user')
+    }
+
+
     return(
       <div>
         <h1>Login</h1>
@@ -40,6 +46,8 @@ export const Login = () => {
             <Input name="email" label="Email" register={register} error={errors.email?.message}/>
             <Input type="password" name="password" label="Senha" register={register} error={errors.password?.message}/>
             <button type="submit">clique aqui</button>
+            <h2>Ainda não possui cadastro, <Link to="/cadastro">CLIQUE AQUI</Link> </h2>
+            
           </form>
 
       </div>

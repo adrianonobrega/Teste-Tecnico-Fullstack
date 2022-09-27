@@ -1,30 +1,52 @@
-import * as yup from 'yup'
-import {yupResolver} from "@hookform/resolvers/yup"
 import {Input} from "../Input"
 import { useForm } from 'react-hook-form';
 import MaskedInput from '../masketInput';
-import { Api,ApiGet } from "../../services/api"
+import { ApiGet } from "../../services/api"
 import { toast } from 'react-toastify';
-import { useState } from 'react';
 
+export const ModalContactUpdate = ({close,contact,setContacts,returnData,contactUpdateId}) => {
 
-export const ModalContactUpdate = ({close,contact,setContacts}) => {
+    const {register,handleSubmit} = useForm();
 
  
-    const {register,handleSubmit} = useForm();
-    const {contactId,setContactId} = useState()
-    const user_id = localStorage.getItem('user_id')
-
-
     function submit(data){
+    [data].map((item) => {
+
+        const name = item.name !== ""
+        const email = item.email !== ""
+        const phone = item.phone !== ""
         
-       
+        const nameVerify = name ? item.name : undefined
+        const phoneVerify = phone  ? item.phone : undefined
+        const emailVerify = email? item.email : undefined
+
+        const contactOne = contact.filter((item) => {
+            return item.id === contactUpdateId
+        })
+
+        contactOne.map((contact) => {
+
+            const obj = {
+                name: nameVerify === undefined ? contact.name : item.name,
+                phone: phoneVerify === undefined ? contact.phone : item.phone,
+                email: emailVerify === undefined ? contact.email : item.email
+            }
+            
+            ApiGet.patch(`contacts/${contactUpdateId}`,obj).then((res) => {
+                returnData()
+                
+                toast.success("Contato atualizado com sucesso!")
+              }).catch((error) => { 
+                console.log(error)    
+                toast.error("Contato não foi atualizado, por favor tente novamente mais tarde")
+              })
+        })
+    })
     }
-    
     return (
         <div>
             <button onClick={close}>X</button>
-            <h3>Cadastro de usuario</h3>
+            <h3>Atualizar usuario</h3>
             
             <form onSubmit={handleSubmit(submit)}>
 
@@ -32,40 +54,28 @@ export const ModalContactUpdate = ({close,contact,setContacts}) => {
             <Input
                 name="name"
                 label="Nome"
-                register={register}
+                register= {Input.value === ' ' ? "contact.name" : register}
             
             
             />
             <Input
                 name="email"
                 label="Email"
-                register={register}
+                register={Input.value === "" ? contact.email : register}
                 placeholder="email"
             />
 
             <MaskedInput
                 name="phone"
                 label="Telefone"
-                    register={register}
+                    register={Input.value === "" ? contact.phone : register}
                     
                     />        
-    
-   
-
-        
-
-           
-
-           
-            
-                    
             
             <button type='submit'>Atualizar</button>
         </form>
          
         </div>
         
-    
-       
     )
 }
