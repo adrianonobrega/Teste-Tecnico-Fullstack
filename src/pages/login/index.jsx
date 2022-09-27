@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import {yupResolver} from "@hookform/resolvers/yup"
 import { Api } from '../../services/api';
 import { toast } from 'react-toastify';
-// import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 export const Login = () => {
 
@@ -14,15 +14,19 @@ export const Login = () => {
     })
 
     const {register,handleSubmit,formState: {errors}} = useForm({resolver:yupResolver(schema)});
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     
     const submit = data => {
       
       Api.post('/users/login',data)
       .then(res => {
+        const {token} = res.data
+        const {user_id} = res.data
+        localStorage.setItem("user_id",user_id)
+        localStorage.setItem("token",token)
         toast.success("Login efetuado com sucesso")
-        console.log(res.data.token)
         
+        return navigate('/user')
       })
       .catch(() => {
         toast.error('Email ou senha invalidos')

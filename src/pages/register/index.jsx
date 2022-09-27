@@ -5,7 +5,7 @@ import {yupResolver} from "@hookform/resolvers/yup"
 import { useState } from 'react';
 import { HiEye,HiEyeOff } from "react-icons/hi";
 import MaskedInput from '../../components/masketInput';
-import { Api } from '../../services/api';
+import { Api} from '../../services/api';
 import { toast } from 'react-toastify';
 
 
