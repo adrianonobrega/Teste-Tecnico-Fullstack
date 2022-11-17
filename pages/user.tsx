@@ -30,17 +30,17 @@ const User =  () => {
     const [modalUpdate,setModalUpdate] = useState<boolean>()
     const [contact_id,setContact_id] = useState()
     
-    const token = localStorage.getItem('token')
-    const user_id = localStorage.getItem('user_id')
+    // const token = 
+    // const user_id = 
     const navigate = useRouter()
 
     function returnDataUser(){
 
-            console.log(user_id,"id")
+            
 
-            Api.get(`users/${user_id}`, {
+            Api.get(`users/${localStorage.getItem('user_id')}`, {
                 headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             }).then((res) => {
                 setUser(res.data)
@@ -66,9 +66,9 @@ const User =  () => {
    
     function returnDataContact(){
     
-        Api.get(`contacts/${user_id}`, {
+        Api.get(`contacts/${localStorage.getItem('user_id')}`, {
             headers: {
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         }).then((res) => {
             setListContact((listContact) => [
@@ -93,7 +93,7 @@ const User =  () => {
         Api.delete(`contacts/${contact_id}`,{
 
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
         }).then((res) => {
             returnDataContact()

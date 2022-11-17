@@ -31,8 +31,7 @@ export const ModalContact = ({setModal,returnDataContact}:modal) => {
 
     const user_id = localStorage.getItem("user_id")
     const token = localStorage.getItem("token")
-    console.log(user_id)
-    console.log(token)
+  
     const submit = (data: any) => {
         Api.post(`contacts/${user_id}`,data,{
             headers: {
