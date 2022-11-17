@@ -1,5 +1,5 @@
 import axios from 'axios'
 
 export const Api = axios.create({
-  baseURL: 'http://localhost:9000/',
+  baseURL: 'https://api-contact-deploy.herokuapp.com/',
 })
