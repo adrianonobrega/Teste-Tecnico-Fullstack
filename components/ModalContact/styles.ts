@@ -25,7 +25,8 @@ button{
     color:white;
     position:relative;
     bottom:50px;
-    left:85px;
+    left:70px;
+    margin-top:50px
 }
 
 h1{

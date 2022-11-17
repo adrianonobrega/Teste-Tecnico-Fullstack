@@ -32,13 +32,14 @@ const Register = () => {
     const navigate = useRouter()
 
     const submit = (data: any) => {
-        Api.post(`users/`, data)
+        console.log(data,"data")
+        Api.post(`/users/`, data)
             .then((res => {
                   toast.success("Usuario cadastrado com sucesso")
                 navigate.push("/")
             }))
             .catch((err => {
-                toast.error("Email ou senha invalidos")
+                toast.error("Usuario não foi cadastrado,por favor tente novamente mais tarde")
                 console.log(err)
             }))
     }

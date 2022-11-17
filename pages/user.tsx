@@ -30,8 +30,7 @@ const User =  () => {
     const [modalUpdate,setModalUpdate] = useState<boolean>()
     const [contact_id,setContact_id] = useState()
     
-    // const token = 
-    // const user_id = 
+ 
     const navigate = useRouter()
 
     function returnDataUser(){

@@ -4,6 +4,7 @@ import * as yup from 'yup'
 import { Api } from "../../services/api"
 import { Input } from "../Input"
 import { Modal } from "../ModalContact/styles"
+import { ModalUpdate } from "../ModalUpdateContact/styles"
 import Button from "../../components/Button"
 
 interface inputRegistration{
@@ -94,8 +95,6 @@ export const ModalContact = ({setModal,returnDataContact}:modal) => {
                          </Form>
                     )}
                 </Formik>
-
-
   </Modal>
    
                
