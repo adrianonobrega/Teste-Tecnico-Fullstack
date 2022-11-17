@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "dist/apps/my-app/.next",
     "build": "tsc",
     "start": "vercel dev",
     "lint": "next lint",
